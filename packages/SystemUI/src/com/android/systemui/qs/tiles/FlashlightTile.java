@@ -16,7 +16,6 @@
 
 package com.android.systemui.qs.tiles;
 
-import android.app.ActivityManager;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.provider.MediaStore;
@@ -88,9 +87,6 @@ public class FlashlightTile extends QSTile<QSTile.BooleanState> implements
 
     @Override
     protected void handleClick() {
-        if (ActivityManager.isUserAMonkey()) {
-            return;
-        }
         MetricsLogger.action(mContext, getMetricsCategory(), !mState.value);
         boolean newState = !mState.value;
         refreshState(newState);
