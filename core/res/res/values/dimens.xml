@@ -285,11 +285,11 @@
     <dimen name="action_bar_stacked_tab_max_width">180dp</dimen>
 
     <!-- Size of notification text (see TextAppearance.StatusBar.EventContent) -->
-    <dimen name="notification_text_size">14sp</dimen>
+    <dimen name="notification_text_size">15sp</dimen>
     <!-- Size of notification text titles (see TextAppearance.StatusBar.EventContent.Title) -->
-    <dimen name="notification_title_text_size">14sp</dimen>
+    <dimen name="notification_title_text_size">15sp</dimen>
     <!-- Size of smaller notification text (see TextAppearance.StatusBar.EventContent.Line2, Info, Time) -->
-    <dimen name="notification_subtext_size">12sp</dimen>
+    <dimen name="notification_subtext_size">13sp</dimen>
 
     <!-- Top padding for notifications in the standard layout. -->
     <dimen name="notification_top_pad">10dp</dimen>
@@ -313,7 +313,7 @@
     <dimen name="notification_inbox_item_top_padding">5dp</dimen>
 
     <!-- Size of the profile badge for notifications -->
-    <dimen name="notification_badge_size">12dp</dimen>
+    <dimen name="notification_badge_size">13dp</dimen>
 
     <!-- Keyguard dimensions -->
     <!-- TEMP -->
@@ -442,7 +442,7 @@
     <dimen name="circular_display_mask_thickness">1px</dimen>
 
     <dimen name="lock_pattern_dot_line_width">3dp</dimen>
-    <dimen name="lock_pattern_dot_size">12dp</dimen>
+    <dimen name="lock_pattern_dot_size">14dp</dimen>
     <dimen name="lock_pattern_dot_size_activated">28dp</dimen>
 
     <dimen name="text_handle_min_size">40dp</dimen>

@@ -36,7 +36,7 @@
     <dimen name="action_bar_subtitle_bottom_margin">9dip</dimen>
 
     <!-- Size of clock font in LockScreen. -->
-    <dimen name="keyguard_pattern_unlock_clock_font_size">112sp</dimen>
+    <dimen name="keyguard_pattern_unlock_clock_font_size">150sp</dimen>
 
     <!-- Size of lockscreen outerring on unsecure unlock LockScreen -->
     <dimen name="keyguard_lockscreen_outerring_diameter">364dp</dimen>
@@ -76,10 +76,10 @@
 
     <!-- Keyguard dimensions -->
     <!-- Size of the clock font in keyguard's status view -->
-    <dimen name="kg_status_clock_font_size">141dp</dimen>
+    <dimen name="kg_status_clock_font_size">180dp</dimen>
 
     <!-- Size of the date font in keyguard's status view  -->
-    <dimen name="kg_status_date_font_size">25.5dp</dimen>
+    <dimen name="kg_status_date_font_size">28.5dp</dimen>
 
     <!-- Size of the generic status lines keyguard's status view  -->
     <dimen name="kg_status_line_font_size">16sp</dimen>
