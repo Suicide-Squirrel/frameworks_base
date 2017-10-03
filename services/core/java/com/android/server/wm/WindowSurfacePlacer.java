@@ -237,17 +237,6 @@ class WindowSurfacePlacer {
 
             mInLayout = false;
 
-            if (mService.needsLayout()) {
-                if (++mLayoutRepeatCount < 6) {
-                    requestTraversal();
-                } else {
-                    Slog.e(TAG, "Performed 6 layouts in a row. Skipping");
-                    mLayoutRepeatCount = 0;
-                }
-            } else {
-                mLayoutRepeatCount = 0;
-            }
-
             if (mService.mWindowsChanged && !mService.mWindowChangeListeners.isEmpty()) {
                 mService.mH.removeMessages(REPORT_WINDOWS_CHANGE);
                 mService.mH.sendEmptyMessage(REPORT_WINDOWS_CHANGE);
