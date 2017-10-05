@@ -51,6 +51,12 @@ public class FlashlightTile extends QSTile<QSTile.BooleanState> implements
     }
 
     @Override
+    protected void handleDestroy() {
+        super.handleDestroy();
+        mFlashlightController.removeListener(this);
+    }
+
+    @Override
     public BooleanState newTileState() {
         return new BooleanState();
     }
