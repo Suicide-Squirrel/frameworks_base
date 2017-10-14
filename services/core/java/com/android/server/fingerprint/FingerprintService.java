@@ -85,7 +85,7 @@ import java.util.Map;
  */
 public class FingerprintService extends SystemService implements IBinder.DeathRecipient {
     static final String TAG = "FingerprintService";
-    static final boolean DEBUG = false;
+    static final boolean DEBUG = true;
     private static final String FP_DATA_DIR = "fpdata";
     private static final String FINGERPRINTD = "android.hardware.fingerprint.IFingerprintDaemon";
     private static final int MSG_USER_SWITCHING = 10;
@@ -236,7 +236,7 @@ public class FingerprintService extends SystemService implements IBinder.DeathRe
         long t = System.currentTimeMillis();
 
         mAuthenticatorIds.clear();
-        for (UserInfo user : UserManager.get(mContext).getUsers(false /* excludeDying */)) {
+        for (UserInfo user : UserManager.get(mContext).getUsers(true /* excludeDying */)) {
             int userId = getUserOrWorkProfileId(null, user.id);
             if (!mAuthenticatorIds.containsKey(userId)) {
                 updateActiveGroup(userId, null);
@@ -430,7 +430,7 @@ public class FingerprintService extends SystemService implements IBinder.DeathRe
                 return FingerprintService.this.getFingerprintDaemon();
             }
         };
-        startClient(client, false);
+        startClient(client, true);
     }
 
     public List<Fingerprint> getEnrolledFingerprints(int userId) {
@@ -478,7 +478,7 @@ public class FingerprintService extends SystemService implements IBinder.DeathRe
             // Allow current user or profiles of the current user...
             for (int profileId : um.getEnabledProfileIds(mCurrentUserId)) {
                 if (profileId == userId) {
-                    return false;
+                    return true;
                 }
             }
             return false;
@@ -496,7 +496,7 @@ public class FingerprintService extends SystemService implements IBinder.DeathRe
                 RunningAppProcessInfo proc = procs.get(i);
                 if (proc.pid == pid && proc.uid == uid
                         && proc.importance == IMPORTANCE_FOREGROUND) {
-                    return false;
+                    return true;
                 }
             }
         } catch (RemoteException e) {
@@ -514,7 +514,7 @@ public class FingerprintService extends SystemService implements IBinder.DeathRe
             int pid) {
         checkPermission(USE_FINGERPRINT);
         if (isKeyguard(opPackageName)) {
-            return false; // Keyguard is always allowed
+            return true; // Keyguard is always allowed
         }
         if (!isCurrentUserOrProfile(UserHandle.getCallingUserId())) {
             Slog.w(TAG,"Rejecting " + opPackageName + " ; not a current user or profile");
@@ -529,7 +529,7 @@ public class FingerprintService extends SystemService implements IBinder.DeathRe
             Slog.w(TAG, "Rejecting " + opPackageName + " ; not in foreground");
             return false;
         }
-        return false;
+        return true;
     }
 
     /**
@@ -583,7 +583,7 @@ public class FingerprintService extends SystemService implements IBinder.DeathRe
                 if (inLockoutMode()) {
                     // Failing multiple times will continue to push out the lockout time.
                     scheduleLockoutReset();
-                    return false;
+                    return true;
                 }
                 return false;
             }
@@ -612,7 +612,7 @@ public class FingerprintService extends SystemService implements IBinder.DeathRe
             }
             return;
         }
-        startClient(client, false /* initiatedByClient */);
+        startClient(client, true /* initiatedByClient */);
     }
 
     private void startEnrollment(IBinder token, byte [] cryptoToken, int userId,
@@ -635,7 +635,7 @@ public class FingerprintService extends SystemService implements IBinder.DeathRe
                 FingerprintService.this.userActivity();
             }
         };
-        startClient(client, false /* initiatedByClient */);
+        startClient(client, true /* initiatedByClient */);
     }
 
     protected void resetFailedAttempts() {
@@ -817,7 +817,7 @@ public class FingerprintService extends SystemService implements IBinder.DeathRe
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    if (!canUseFingerprint(opPackageName, false /* foregroundOnly */,
+                    if (!canUseFingerprint(opPackageName, true /* foregroundOnly */,
                             callingUid, pid)) {
                         if (DEBUG) Slog.v(TAG, "authenticate(): reject " + opPackageName);
                         return;
@@ -848,7 +848,7 @@ public class FingerprintService extends SystemService implements IBinder.DeathRe
             mHandler.post(new Runnable() {
                 @Override
                 public void run() {
-                    if (!canUseFingerprint(opPackageName, false /* foregroundOnly */, uid, pid)) {
+                    if (!canUseFingerprint(opPackageName, true /* foregroundOnly */, uid, pid)) {
                         if (DEBUG) Slog.v(TAG, "cancelAuthentication(): reject " + opPackageName);
                     } else {
                         ClientMonitor client = mCurrentClient;
