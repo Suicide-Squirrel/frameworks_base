@@ -366,7 +366,6 @@ public final class BatteryStatsService extends IBatteryStats.Stub
         try {
             return ParcelFileDescriptor.fromData(data, "battery-stats");
         } catch (IOException e) {
-            Slog.w(TAG, "Unable to create shared memory", e);
             return null;
         }
     }

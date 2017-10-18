@@ -625,8 +625,6 @@ public class FingerprintManager {
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
-        } else {
-            Log.w(TAG, "rename(): Service not connected!");
         }
     }
 
@@ -702,8 +700,6 @@ public class FingerprintManager {
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
-        } else {
-            Log.w(TAG, "isFingerprintHardwareDetected(): Service not connected!");
         }
         return false;
     }
@@ -721,8 +717,6 @@ public class FingerprintManager {
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
-        } else {
-            Log.w(TAG, "getAuthenticatorId(): Service not connected!");
         }
         return 0;
     }
@@ -741,8 +735,6 @@ public class FingerprintManager {
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
-        } else {
-            Log.w(TAG, "resetTimeout(): Service not connected!");
         }
     }
 
@@ -776,8 +768,6 @@ public class FingerprintManager {
             } catch (RemoteException e) {
                 throw e.rethrowFromSystemServer();
             }
-        } else {
-            Log.w(TAG, "addLockoutResetCallback(): Service not connected!");
         }
     }
 
