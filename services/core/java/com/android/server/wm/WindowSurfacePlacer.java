@@ -623,7 +623,7 @@ class WindowSurfacePlacer {
             do {
                 repeats++;
                 if (repeats > 6) {
-                    Slog.w(TAG, "Animation repeat aborted after too many iterations");
+                    repeats = 1;
                     displayContent.layoutNeeded = false;
                     break;
                 }
@@ -655,7 +655,8 @@ class WindowSurfacePlacer {
                     performLayoutLockedInner(displayContent, repeats == 1,
                             false /* updateInputWindows */);
                 } else {
-                    Slog.w(TAG, "Layout repeat skipped after too many iterations");
+                    performLayoutLockedInner(displayContent, repeats == 0,
+                            false /* updateInputWindows */);
                 }
 
                 // FIRST AND ONE HALF LOOP: Make WindowManagerPolicy think
